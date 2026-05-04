@@ -1,0 +1,23 @@
+<div class="page-header">
+    <h2 style="font-size: 1.75rem;">Projects Dashboard</h2>
+    <a href="/projects/new" class="btn btn-primary">+ New Project</a>
+</div>
+
+<div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+    <% if (projects.length === 0) { %>
+        <p class="text-muted" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">No projects found. Be the first to create one!</p>
+    <% } %>
+    <% projects.forEach(project => { %>
+        <div class="panel project-card" style="transition: transform 0.2sease, box-shadow 0.2s ease;">
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">
+                <a href="/projects/<%= project.id %>" style="color: inherit;"><%= project.name %></a>
+            </h3>
+            <p class="text-muted" style="margin-bottom: 1rem; font-size: 0.95rem;">
+                <%= project.description ? project.description.substring(0, 100) + '...' : 'No description provided.' %>
+            </p>
+            <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+                <span>By <a href="/users/<%= project.user_id %>" style="color: var(--primary-color)"><%= project.author_name %></a></span>
+            </div>
+        </div>
+    <% }) %>
+</div>

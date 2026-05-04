@@ -1,0 +1,43 @@
+<div class="panel" style="max-width: 600px; margin: 4rem auto;">
+    <div class="page-header" style="margin-bottom: 1.5rem;">
+        <h2 style="margin: 0; display: flex; align-items: center; gap: 1rem;">
+            <%= user.username %>'s Profile
+            <% if (user.is_admin) { %>
+                <span class="badge badge-admin">Admin</span>
+            <% } %>
+        </h2>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+        <h4 style="margin-bottom: 1rem;">Account Settings</h4>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            
+            <% if (currentUser && currentUser.id === user.id) { %>
+                <form action="/users/<%= user.id %>/destroy" method="POST" onsubmit="return confirm('Are you sure you want to delete your account? This cannot be undone.');">
+                    <button type="submit" class="btn btn-danger">Delete My Account</button>
+                </form>
+            <% } %>
+
+            <% /* Admin Tools */ %>
+            <% if (currentUser && currentUser.is_admin && currentUser.id !== user.id) { %>
+                <% if (!user.is_admin) { %>
+                    <form action="/users/<%= user.id %>/setAdmin" method="POST">
+                        <button type="submit" class="btn" style="background: #fbbf24; color: #000;">Grant Admin Status</button>
+                    </form>
+                <% } else { %>
+                    <form action="/users/<%= user.id %>/removeAdmin" method="POST">
+                        <button type="submit" class="btn btn-secondary">Revoke Admin</button>
+                    </form>
+                <% } %>
+                <form action="/users/<%= user.id %>/destroy" method="POST" onsubmit="return confirm('Delete this user forcefully?');">
+                    <button type="submit" class="btn btn-danger">Force Delete User</button>
+                </form>
+            <% } %>
+
+        </div>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+        <a href="/projects" class="btn btn-secondary">&larr; Back to Dashboard</a>
+    </div>
+</div>

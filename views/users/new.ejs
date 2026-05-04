@@ -1,0 +1,22 @@
+<div class="panel" style="max-width: 400px; margin: 4rem auto;">
+    <h2 style="margin-bottom: 1.5rem; text-align: center;">Register an Account</h2>
+    <% if (typeof error !== 'undefined') { %>
+        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); padding: 0.75rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+            <p style="color: var(--danger); margin: 0; font-size: 0.9rem;"><%= error %></p>
+        </div>
+    <% } %>
+    <form action="/users" method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" required placeholder="Choose a username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" required placeholder="Choose a secure password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.875rem;">Create Account</button>
+    </form>
+    <p style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+        Already have an account? <a href="/sign_in">Sign In here</a>
+    </p>
+</div>

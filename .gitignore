@@ -1,0 +1,5 @@
+node_modules/
+basecamp.db
+basecamp.db-journal
+.env
+.DS_Store
