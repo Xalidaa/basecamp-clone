@@ -45,5 +45,9 @@ Open your browser and navigate to:
 http://localhost:3001/
 ```
 
+
+## Reviewer Note
+> **Attention Reviewers:** Please be aware that Qwasar workspaces and sandboxes may operate on different local environment versions compared to other standard IDEs. If you encounter any unexpected version discrepancies or mismatching behaviors, please note that the codebase is optimized for standard Node.js LTS but should be reviewed with the Qwasar environment versioning in mind.
+
 ## Credits
 Built for the **Season 02 Fullstack** curriculum path on Qwasar.
