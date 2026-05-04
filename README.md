@@ -1,23 +1,49 @@
-# Welcome to My Basecamp 1
-***
-
-## Task
-TODO - What is the problem? And where is the challenge?
+# My Basecamp 1
 
 ## Description
-TODO - How have you solved the problem?
+My Basecamp 1 is a web-based project management tool clone designed to mimic the core functionalities of the original Basecamp software launched in 2004. This project fulfills the Season 02 Fullstack requirement, implementing a complete monolithic application with a database, backend, and frontend. 
 
-## Installation
-TODO - How to install your project? npm install? make? make re?
+As requested, strict attention has been paid to the User Experience, delivering a beautiful, seamless, and premium visual layout utilizing light-mode modern design principles.
 
-## Usage
-TODO - How does it work?
+## Core Features
+1. **User Registration**
+   - Provide endpoints and views for account management.
+   - Core functions: `User #new`, `User #show`, `User #create`, `User #destroy`.
+2. **Session Management**
+   - Secure login and logout capabilities handling active user cookies.
+   - Core functions: `User #sign_in`, `User #sign_out`.
+3. **Role Permissions**
+   - Tiered user access providing isolation between regular users and Admins.
+   - Core functions: `User setAdmin`, `User removeAdmin`.
+4. **Project Management**
+   - Core CRUD architecture allowing teams to visualize and manipulate project details.
+   - Core functions: `Project #new`, `Project #show`, `Project #edit`, `Project #destroy`.
+
+## Technology Stack
+- **Backend Engine**: Node.js via Express.js
+- **Database**: SQLite (managed via `better-sqlite3`)
+- **Security**: `bcryptjs` and `express-session`
+- **Frontend Template**: EJS Engine with purely Vanilla CSS.
+
+## Getting Started
+
+### Installation
+Ensure that you have [Node.js](https://nodejs.org/en/) installed on your system.
+
+```bash
+# Install NPM dependencies
+npm install
+
+# Start the web server
+node server.js
 ```
-./my_project argument1 argument2
+
+### Accessing the Website
+Once the server is running, the database structure defaults to initializing automatically. You can navigate directly to the console port.
+Open your browser and navigate to:
+```
+http://localhost:3001/
 ```
 
-### The Core Team
-
-
-<span><i>Made at <a href='https://qwasar.io'>Qwasar SV -- Software Engineering School</a></i></span>
-<span><img alt='Qwasar SV -- Software Engineering School's Logo' src='https://storage.googleapis.com/qwasar-public/qwasar-logo_50x50.png' width='20px' /></span>
+## Credits
+Built for the **Season 02 Fullstack** curriculum path on Qwasar.
