@@ -20,6 +20,9 @@
                         <span class="badge badge-admin">Admin</span>
                     <% } %>
                 </a>
+                <% if (currentUser.is_admin) { %>
+                    <a href="/admin/users" class="btn btn-warning btn-sm" style="padding: 0.4rem 0.8rem;">Admin Dashboard</a>
+                <% } %>
                 <form action="/sign_out" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-secondary" style="padding: 0.4rem 0.8rem;">Logout</button>
                 </form>

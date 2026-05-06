@@ -1,7 +1,8 @@
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const db = require('./db');
+const sequelize = require('./models/index');
+const User = require('./models/User');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -28,10 +29,13 @@ app.set('layout', 'layout');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware to expose session variables to views globally
-app.use((req, res, next) => {
-    res.locals.currentUser = req.session.userId 
-        ? db.prepare('SELECT id, username, is_admin FROM users WHERE id = ?').get(req.session.userId)
-        : null;
+app.use(async (req, res, next) => {
+    if (req.session.userId) {
+        const user = await User.findByPk(req.session.userId, { attributes: ['id', 'username', 'is_admin'] });
+        res.locals.currentUser = user ? user.get({ plain: true }) : null;
+    } else {
+        res.locals.currentUser = null;
+    }
     next();
 });
 
@@ -39,11 +43,13 @@ app.use((req, res, next) => {
 const userRoutes = require('./routes/users');
 const sessionRoutes = require('./routes/sessions');
 const projectRoutes = require('./routes/projects');
+const adminRoutes = require('./routes/admin');
 
 // Use Routes
 app.use('/users', userRoutes);
 app.use('/', sessionRoutes);
 app.use('/projects', projectRoutes);
+app.use('/admin', adminRoutes);
 
 // Home Redirect
 app.get('/', (req, res) => {
@@ -54,7 +60,11 @@ app.get('/', (req, res) => {
     }
 });
 
-// Server Listen
-app.listen(PORT, () => {
-    console.log(`MyBasecamp1 server running at http://localhost:${PORT}`);
+// Sync database and start server
+sequelize.sync().then(() => {
+    app.listen(PORT, () => {
+        console.log(`MyBasecamp1 server running at http://localhost:${PORT}`);
+    });
+}).catch(err => {
+    console.error('Unable to connect to the database:', err);
 });

@@ -14,7 +14,11 @@
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="form-control" required placeholder="Choose a secure password">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem; padding: 0.875rem;">Create Account</button>
+        <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem;">
+            <input type="checkbox" name="is_admin" id="is_admin" value="true">
+            <label for="is_admin" style="margin: 0; font-weight: normal; cursor: pointer;">Register as Admin</label>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 0.875rem;">Create Account</button>
     </form>
     <p style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
         Already have an account? <a href="/sign_in">Sign In here</a>
