@@ -1,5 +1,6 @@
 const Project = require('../models/Project');
 const User = require('../models/User');
+const Attachment = require('../models/Attachment');
 
 const projectController = {
   index: async (req, res) => {
@@ -34,7 +35,10 @@ const projectController = {
 
   show: async (req, res) => {
     const project = await Project.findByPk(req.params.id, {
-      include: [{ model: User, as: 'author', attributes: ['username'] }]
+      include: [
+        { model: User, as: 'author', attributes: ['username'] },
+        { model: Attachment }
+      ]
     });
     if (!project) return res.status(404).send('Not Found');
 

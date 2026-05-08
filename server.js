@@ -3,7 +3,8 @@ const session = require('express-session');
 const path = require('path');
 const sequelize = require('./models/index');
 const User = require('./models/User');
-
+const Project = require('./models/Project');
+const Attachment = require('./models/Attachment');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
