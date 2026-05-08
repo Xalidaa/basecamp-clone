@@ -58,6 +58,45 @@
             </div>
         <% } %>
     </div>
+
+    <!-- Discussions Section -->
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h3 style="margin: 0; font-size: 1.5rem;">Discussions</h3>
+            <% if (currentUser && (currentUser.id === project.user_id || currentUser.is_admin)) { %>
+                <a href="/projects/<%= project.id %>/threads/new" class="btn btn-primary" style="font-size: 0.9rem;">+ New Thread</a>
+            <% } %>
+        </div>
+
+        <% if (project.Threads && project.Threads.length > 0) { %>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <% project.Threads.forEach(thread => { %>
+                <div style="background: var(--bg-secondary); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.2rem; color: var(--primary-color);"><%= thread.title %></h4>
+                        <% if (currentUser && (currentUser.id === project.user_id || currentUser.is_admin)) { %>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <a href="/threads/<%= thread.id %>/edit" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.6rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;">Edit</a>
+                                <form action="/threads/<%= thread.id %>/delete" method="POST" style="margin: 0;" onsubmit="return confirm('Delete this thread?');">
+                                    <button type="submit" style="font-size: 0.85rem; color: var(--danger); background: transparent; border: 1px solid var(--danger); padding: 0.3rem 0.6rem; border-radius: 4px; cursor: pointer;">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+                    </div>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">
+                        Posted by <strong><%= thread.author ? thread.author.username : 'Unknown' %></strong>
+                    </p>
+                    <div style="white-space: pre-wrap; line-height: 1.6; color: var(--text-main); font-size: 0.95rem;">
+                        <%= thread.content %>
+                    </div>
+                </div>
+            <% }) %>
+            </div>
+        <% } else { %>
+            <p class="text-muted">No discussion threads started yet.</p>
+        <% } %>
+    </div>
+
     
     <div style="margin-top: 4rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
         <a href="/projects" class="btn btn-secondary">&larr; Back to Dashboard</a>

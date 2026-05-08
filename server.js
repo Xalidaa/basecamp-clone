@@ -5,6 +5,7 @@ const sequelize = require('./models/index');
 const User = require('./models/User');
 const Project = require('./models/Project');
 const Attachment = require('./models/Attachment');
+const Thread = require('./models/Thread');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -45,12 +46,15 @@ const userRoutes = require('./routes/users');
 const sessionRoutes = require('./routes/sessions');
 const projectRoutes = require('./routes/projects');
 const adminRoutes = require('./routes/admin');
+const threadRoutes = require('./routes/threads');
 
 // Use Routes
 app.use('/users', userRoutes);
 app.use('/', sessionRoutes);
 app.use('/projects', projectRoutes);
 app.use('/admin', adminRoutes);
+app.use('/projects/:projectId/threads', threadRoutes);
+app.use('/threads', threadRoutes);
 
 // Home Redirect
 app.get('/', (req, res) => {
