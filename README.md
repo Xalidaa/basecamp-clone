@@ -1,7 +1,7 @@
-# My Basecamp 1
+# My Basecamp
 
 ## Description
-My Basecamp 1 is a web-based project management tool clone designed to mimic the core functionalities of the original Basecamp software launched in 2004. This project fulfills the Season 02 Fullstack requirement, implementing a complete monolithic application with a database, backend, and frontend. 
+My Basecamp is a web-based project management tool clone designed to mimic the core functionalities of the original Basecamp software launched in 2004. This project fulfills the Season 02 Fullstack requirement, implementing a complete monolithic application with a database, backend, and frontend. 
 
 As requested, strict attention has been paid to the User Experience, delivering a beautiful, seamless, and premium visual layout utilizing light-mode modern design principles.
 
