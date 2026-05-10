@@ -6,7 +6,9 @@ My Basecamp 1 is a web-based project management tool clone designed to mimic the
 As requested, strict attention has been paid to the User Experience, delivering a beautiful, seamless, and premium visual layout utilizing light-mode modern design principles.
 
 ## Live Demo & Hosting
-This project is configured to be hosted on **Render** (recommended) or any platform supporting Node.js and PostgreSQL.
+Check out the live version here: **[MyBasecamp Live](https://basecamp-clone.onrender.com/)**
+
+This project is hosted on **Render** using a PostgreSQL database.
 
 ### Hosting on Render (Step-by-Step)
 1. **Create a PostgreSQL Database**:
