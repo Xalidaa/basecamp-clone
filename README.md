@@ -5,6 +5,27 @@ My Basecamp 1 is a web-based project management tool clone designed to mimic the
 
 As requested, strict attention has been paid to the User Experience, delivering a beautiful, seamless, and premium visual layout utilizing light-mode modern design principles.
 
+## Live Demo & Hosting
+This project is configured to be hosted on **Render** (recommended) or any platform supporting Node.js and PostgreSQL.
+
+### Hosting on Render (Step-by-Step)
+1. **Create a PostgreSQL Database**:
+   - Go to [Render Dashboard](https://dashboard.render.com/) and click **New > PostgreSQL**.
+   - After creation, scroll down to the **Connections** section.
+   - Click the **Copy** button next to **Internal Database URL** (this is for secure, fast communication between your database and web service).
+2. **Create a Web Service**:
+   - Click **New > Web Service** and connect your GitHub repository.
+   - **Environment**: Node
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+3. **Configure Environment Variables**:
+   - In your Render Web Service, go to the **Environment** tab.
+   - Add a new variable: `DATABASE_URL` and paste the connection string from your Render database.
+   - (Optional) Add `SESSION_SECRET` with a random string.
+4. **Deploy**: Render will automatically deploy your project. Once finished, you will receive a `xxx.onrender.com` link.
+
+---
+
 ## Core Features
 1. **User Registration**
    - Provide endpoints and views for account management.
@@ -18,6 +39,15 @@ As requested, strict attention has been paid to the User Experience, delivering 
 4. **Project Management**
    - Core CRUD architecture allowing teams to visualize and manipulate project details.
    - Core functions: `Project #new`, `Project #show`, `Project #edit`, `Project #destroy`.
+5. **Discussion Threads**
+   - Centralized communication hubs within projects for organized topic-based discussions.
+   - Core functions: `Thread #new`, `Thread #show`, `Thread #edit`, `Thread #destroy`.
+6. **Messaging System**
+   - Interactive comment threads allowing users to post, edit, and manage messages within any discussion.
+   - Core functions: `Message #create`, `Message #edit`, `Message #destroy`.
+7. **File Attachments**
+   - Robust asset management enabling users to upload and track project-related files and documents.
+   - Core functions: `Attachment #create`, `Attachment #destroy`.
 
 ## Technology Stack
 - **Backend Engine**: Node.js via Express.js
