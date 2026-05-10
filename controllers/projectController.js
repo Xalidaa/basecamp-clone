@@ -2,6 +2,7 @@ const Project = require('../models/Project');
 const User = require('../models/User');
 const Attachment = require('../models/Attachment');
 const Thread = require('../models/Thread');
+const Message = require('../models/Message');
 
 const projectController = {
   index: async (req, res) => {
@@ -41,7 +42,10 @@ const projectController = {
         { model: Attachment },
         { 
           model: Thread,
-          include: [{ model: User, as: 'author', attributes: ['username'] }]
+          include: [
+            { model: User, as: 'author', attributes: ['username'] },
+            { model: Message, attributes: ['id'] }
+          ]
         }
       ]
     });

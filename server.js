@@ -6,6 +6,7 @@ const User = require('./models/User');
 const Project = require('./models/Project');
 const Attachment = require('./models/Attachment');
 const Thread = require('./models/Thread');
+const Message = require('./models/Message');
 const app = express();
 const PORT = process.env.PORT || 3001;
 

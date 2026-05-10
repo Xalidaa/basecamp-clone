@@ -73,7 +73,9 @@
             <% project.Threads.forEach(thread => { %>
                 <div style="background: var(--bg-secondary); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.2s ease;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.2rem; color: var(--primary-color);"><%= thread.title %></h4>
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.2rem;">
+                            <a href="/threads/<%= thread.id %>" style="color: var(--primary-color); text-decoration: none; hover: underline;"><%= thread.title %></a>
+                        </h4>
                         <% if (currentUser && (currentUser.id === project.user_id || currentUser.is_admin)) { %>
                             <div style="display: flex; gap: 0.5rem;">
                                 <a href="/threads/<%= thread.id %>/edit" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.6rem; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;">Edit</a>
@@ -84,10 +86,14 @@
                         <% } %>
                     </div>
                     <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 1rem;">
-                        Posted by <strong><%= thread.author ? thread.author.username : 'Unknown' %></strong>
+                        Posted by <strong><%= thread.author ? thread.author.username : 'Unknown' %></strong> &bull; <%= new Date(thread.createdAt).toLocaleDateString() %> &bull; 
+                        <span style="color: var(--primary-color); font-weight: 500;"><%= thread.Messages ? thread.Messages.length : 0 %> messages</span>
                     </p>
-                    <div style="white-space: pre-wrap; line-height: 1.6; color: var(--text-main); font-size: 0.95rem;">
+                    <div style="white-space: pre-wrap; line-height: 1.6; color: var(--text-main); font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
                         <%= thread.content %>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <a href="/threads/<%= thread.id %>" style="font-size: 0.9rem; font-weight: 500; color: var(--primary-color);">View Discussion &rarr;</a>
                     </div>
                 </div>
             <% }) %>

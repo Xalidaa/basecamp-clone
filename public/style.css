@@ -1,20 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #2563eb;
-  --primary-hover: #1d4ed8;
-  --bg-color: #f8fafc;
-  --panel-bg: #ffffff;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
+  --primary-color: #3b82f6;
+  --primary-hover: #60a5fa;
+  --bg-color: #0f172a;
+  --panel-bg: #1e293b;
+  --bg-secondary: #334155;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
   --radius-lg: 16px;
   --radius-md: 8px;
-  --transition: all 0.2s ease;
-  --danger: #ef4444;
-  --success: #10b981;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --danger: #f87171;
+  --success: #34d399;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -34,13 +35,13 @@ body {
 }
 
 /* Base Typography */
-h1, h2, h3, h4 { color: #0f172a; font-weight: 600; letter-spacing: -0.02em; }
+h1, h2, h3, h4 { color: var(--text-main); font-weight: 600; letter-spacing: -0.02em; }
 a { color: var(--primary-color); text-decoration: none; transition: var(--transition); }
 a:hover { color: var(--primary-hover); text-decoration: underline; }
 
 /* Layout */
 .navbar {
-  background: white;
+  background: #1e293b;
   border-bottom: 1px solid var(--border-color);
   padding: 1rem 2rem;
   display: flex;
@@ -55,7 +56,7 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 .nav-brand {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-main);
   letter-spacing: -0.03em;
 }
 
@@ -101,7 +102,7 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 .form-control {
   background: #fff;
   border: 1px solid #cbd5e1;
-  color: var(--text-main);
+  color: #1e293b;
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
   font-family: inherit;
@@ -146,18 +147,18 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   color: white;
 }
 
-.btn-danger { background: white; color: var(--danger); border-color: var(--danger); }
-.btn-danger:hover { background: #fef2f2; text-decoration: none; }
+.btn-danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+.btn-danger:hover { background: rgba(248, 113, 113, 0.1); text-decoration: none; }
 
 .btn-secondary {
-  background: white;
+  background: var(--bg-secondary);
   color: var(--text-main);
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
 }
 .btn-secondary:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
+  background: #475569;
+  border-color: #64748b;
   text-decoration: none;
   color: var(--text-main);
 }

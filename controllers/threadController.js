@@ -1,8 +1,25 @@
 const Thread = require('../models/Thread');
 const Project = require('../models/Project');
 const User = require('../models/User');
+const Message = require('../models/Message');
 
 const threadController = {
+  show: async (req, res) => {
+    const thread = await Thread.findByPk(req.params.id, {
+      include: [
+        { model: Project },
+        { model: User, as: 'author', attributes: ['username'] },
+        { 
+          model: Message,
+          include: [{ model: User, as: 'author', attributes: ['username'] }]
+        }
+      ]
+    });
+    if (!thread) return res.status(404).send('Thread Not Found');
+
+    res.render('threads/show', { thread: thread.get({ plain: true }) });
+  },
+
   new: async (req, res) => {
     const project = await Project.findByPk(req.params.projectId);
     if (!project) return res.status(404).send('Project Not Found');

@@ -1,0 +1,76 @@
+<div class="panel" style="margin: 2rem auto; max-width: 900px;">
+    <div style="margin-bottom: 2rem;">
+        <a href="/projects/<%= thread.project_id %>" class="text-muted" style="text-decoration: none; font-size: 0.9rem;">&larr; Back to <%= thread.Project.name %></a>
+    </div>
+
+    <div class="thread-header" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 2rem; margin-bottom: 2.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;"><%= thread.title %></h1>
+            <% if (currentUser && (currentUser.id === thread.user_id || currentUser.is_admin)) { %>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="/threads/<%= thread.id %>/edit" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Edit</a>
+                    <form action="/threads/<%= thread.id %>/delete" method="POST" style="margin: 0;" onsubmit="return confirm('Delete this thread?');">
+                        <button type="submit" class="btn btn-danger" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Delete</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+        <p class="text-muted" style="font-size: 0.95rem;">
+            Started by <strong><%= thread.author ? thread.author.username : 'Unknown' %></strong> &bull; <%= new Date(thread.createdAt).toLocaleString() %>
+        </p>
+    </div>
+
+    <div class="thread-content" style="font-size: 1.1rem; white-space: pre-wrap; line-height: 1.8; color: var(--text-main); margin-bottom: 4rem; padding: 0 1rem;">
+        <%= thread.content %>
+    </div>
+
+    <div class="messages-section" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 3rem;">
+        <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">Messages</h3>
+
+        <% if (thread.Messages && thread.Messages.length > 0) { %>
+            <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
+                <% thread.Messages.forEach(message => { %>
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="flex-shrink: 0;">
+                            <div style="width: 40px; height: 40px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                                <%= (message.author ? message.author.username[0] : '?').toUpperCase() %>
+                            </div>
+                        </div>
+                        <div style="flex: 1; background: var(--bg-secondary); border-radius: 12px; padding: 1.2rem; border: 1px solid rgba(255,255,255,0.05); position: relative;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                                <span style="font-weight: 600; font-size: 0.95rem;"><%= message.author ? message.author.username : 'Unknown' %></span>
+                                <span class="text-muted" style="font-size: 0.8rem;"><%= new Date(message.createdAt).toLocaleString() %></span>
+                            </div>
+                            <div style="white-space: pre-wrap; line-height: 1.6; color: var(--text-main); font-size: 0.95rem;">
+                                <%= message.content %>
+                            </div>
+                            
+                            <% if (currentUser && (currentUser.id === message.user_id || currentUser.is_admin)) { %>
+                                <div style="display: flex; gap: 0.8rem; margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.8rem;">
+                                    <a href="/threads/messages/<%= message.id %>/edit" style="font-size: 0.8rem; color: var(--text-muted); text-decoration: none;">Edit</a>
+                                    <form action="/threads/messages/<%= message.id %>/delete" method="POST" style="margin: 0;" onsubmit="return confirm('Delete this message?');">
+                                        <button type="submit" style="font-size: 0.8rem; color: var(--danger); background: transparent; border: none; padding: 0; cursor: pointer;">Delete</button>
+                                    </form>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p class="text-muted" style="margin-bottom: 3rem; font-style: italic;">No messages yet. Be the first to reply!</p>
+        <% } %>
+
+        <% if (currentUser) { %>
+            <div style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px; border: 1px solid var(--primary-color);">
+                <h4 style="margin-top: 0; margin-bottom: 1.5rem; font-size: 1.2rem;">Post a Message</h4>
+                <form action="/threads/<%= thread.id %>/messages" method="POST">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <textarea name="content" required placeholder="Type your message here..." style="width: 100%; min-height: 120px; padding: 1rem; border-radius: 8px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); font-family: inherit; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post Message</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</div>
